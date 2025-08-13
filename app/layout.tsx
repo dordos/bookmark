@@ -1,11 +1,12 @@
+import { SessionProvider } from 'next-auth/react';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
-import { BookMarkedIcon } from 'lucide-react';
-import Nav from './Nav';
 import { use } from 'react';
+import { BookMarkedIcon } from 'lucide-react';
 import { auth } from '@/lib/auth';
-import { SessionProvider } from 'next-auth/react';
+import Nav from './Nav';
+import './globals.css';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -18,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Book % Mark',
+  title: 'Book & Mark',
   description: 'Social BookMark Service',
 };
 
@@ -28,24 +29,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const session = use(auth());
+
   return (
-    <html lang='en'>
+    <html lang='en' suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className='flex'>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
           <SessionProvider session={session}>
-            <header className='flex justify-between'>
-              <h1 className='text-3xl flex items-center tracking-tight font-bold'>
-                <BookMarkedIcon />
-                Book & Mark
-              </h1>
-              <Nav>login</Nav>
-            </header>
-            <main className='h-screen'>{children}</main>
-            <footer className='mt-auto'>@appgineer</footer>
+            <div className='flex flex-col container justify-center mx-auto w-screen'>
+              <header className='flex justify-between'>
+                <h1 className='text-3xl flex items-center tracking-tight font-bold text-green-500 dark:text-amber-300'>
+                  <BookMarkedIcon size={'28'} color='blue' /> Book & Mark
+                </h1>
+                <Nav />
+              </header>
+              <main className='flex-1 h-screen border-1'>{children}</main>
+              <footer className='mt-auto'>&#169; dordos SeniorCoding</footer>
+            </div>
           </SessionProvider>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

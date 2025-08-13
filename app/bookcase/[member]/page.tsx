@@ -4,7 +4,7 @@ type Props = {
   param: Promise<{ member: string }>;
 };
 
-export default function Library({ params }: Props) {
+export default function BookCase({ params }: Props) {
   const { member } = use(params);
   return (
     <>

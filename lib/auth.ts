@@ -12,7 +12,7 @@ export const {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/login',
+    // signIn: '/login',
   },
   providers: [Google],
 });
