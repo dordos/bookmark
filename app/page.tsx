@@ -1,11 +1,9 @@
-import Image from 'next/image';
+import { use } from 'react';
+import { PlusIcon, FolderCogIcon, LayoutGridIcon } from 'lucide-react';
+import { auth } from '@/lib/auth';
 
 export default function Home() {
-  return (
-    <div className=''>
-      <div className='flex flex-col h-full border-2 border-red-400 px-2'>
-        div 1
-      </div>
-    </div>
-  );
+  const session = use(auth());
+
+  return <div className=''></div>;
 }

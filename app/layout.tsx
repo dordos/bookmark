@@ -1,12 +1,13 @@
+import { ThemeProvider } from '@/components/theme-provider';
 import { SessionProvider } from 'next-auth/react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { use } from 'react';
 import { BookMarkedIcon } from 'lucide-react';
 import { auth } from '@/lib/auth';
 import Nav from './Nav';
 import './globals.css';
-import { ThemeProvider } from '@/components/theme-provider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -33,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased px-2`}
       >
         <ThemeProvider
           attribute='class'
@@ -42,15 +43,20 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <SessionProvider session={session}>
-            <div className='flex flex-col container justify-center mx-auto w-screen'>
+            <div className='flex flex-col container justify-between mx-auto h-screen'>
               <header className='flex justify-between'>
-                <h1 className='text-3xl flex items-center tracking-tight font-bold text-green-500 dark:text-amber-300'>
-                  <BookMarkedIcon size={'28'} color='blue' /> Book & Mark
-                </h1>
+                <Link
+                  href='/'
+                  className='text-3xl flex items-center tracking-tight font-bold text-green-500 dark:text-amber-300'
+                >
+                  <BookMarkedIcon size={28} /> Book & Mark
+                </Link>
                 <Nav />
               </header>
-              <main className='flex-1 h-screen border-1'>{children}</main>
-              <footer className='mt-auto'>&#169; dordos SeniorCoding</footer>
+              <main className='flex-1'>{children}</main>
+              <footer className='text-center text-green-500'>
+                &#169; dordos 2025
+              </footer>
             </div>
           </SessionProvider>
         </ThemeProvider>

@@ -11,6 +11,7 @@
     "db:pull": "dotenv -e .env.local prisma db pull",
     "db:gen": "dotenv -e .env.local prisma generate",
     "db:push": "dotenv -e .env.local prisma db push",
+    "db:reset": "dotenv -e .env.local prisma migrate reset",
     "db:seed": "dotenv -e .env.local prisma db seed"
   },
   "prisma": {
@@ -59,6 +60,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv-cli": "^10.0.0",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "eslint-config-prettier": "^10.1.8",

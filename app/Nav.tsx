@@ -1,8 +1,8 @@
+import ThemeChanger from '@/components/theme-changer';
 import Image from 'next/image';
 import Link from 'next/link';
+import { SquareLibraryIcon } from 'lucide-react';
 import { auth } from '@/lib/auth';
-import { MoonStar, SunIcon } from 'lucide-react';
-import ThemeChanger from '@/components/theme-changer';
 
 export default async function Nav() {
   const session = await auth();
@@ -10,15 +10,15 @@ export default async function Nav() {
 
   return (
     <div className='flex items-center gap-5'>
-      <Link href='/' className='active-scale'>
-        Home
-      </Link>
       <Link
-        href={`bookcase/${session?.user?.name}`}
+        href={`/bookcase/${session?.user?.name}`}
         className='btn-icon'
-        title={`${session?.user?.name}Bookcase`}
-      ></Link>
-      <ThemeChanger></ThemeChanger>
+        title={`${session?.user?.name} BookCase`}
+      >
+        <SquareLibraryIcon />
+      </Link>
+
+      <ThemeChanger />
 
       {didLogin ? (
         <Link href='/my'>
