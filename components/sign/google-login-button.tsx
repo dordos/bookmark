@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 export function GoogleLoginButton() {
   return (
     <Button
+      onClick={() => login('google')}
       variant='outline'
       className='w-full gap-2 rounded-md border border-gray-300 bg-white text-gray-900 hover:bg-gray-50 h-12'
     >

@@ -1,5 +1,7 @@
-import { cn } from '@/lib/utils';
+/* eslint-disable @next/next/no-img-element */
 import { ComponentProps } from 'react';
+import { cn } from '@/lib/utils';
+
 type Props = {
   src: string;
   alt?: string;

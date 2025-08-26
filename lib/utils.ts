@@ -12,4 +12,5 @@ export const dynamicCss = [
   'translate-x-[-80px]',
   'translate-x-[-100px]',
   'translate-x-[-120px]',
+  'translate-x-[-140px]',
 ];
