@@ -4,7 +4,6 @@ import { authenticate, regist } from '@/actions/sign';
 import { Button } from '@/components/ui/button';
 import LabelInput from '@/components/ui/label-input';
 import { redirect, useSearchParams } from 'next/navigation';
-
 import {
   FormEvent,
   useActionState,
