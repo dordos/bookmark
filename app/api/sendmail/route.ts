@@ -4,8 +4,33 @@ import { redirect } from 'next/navigation';
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/db';
 
+type SendEmailReqBody = {
+  email: string;
+  emailcheck: string;
+  oldEmailcheck?: string;
+  nickname?: string;
+  emailType: 'Regist' | 'ResetPassword';
+};
+
 export async function POST(req: Request) {
-  const { email, emailcheck, oldEmailcheck } = await req.json();
+  const {
+    email,
+    emailcheck,
+    oldEmailcheck,
+    nickname,
+    emailType,
+  }: SendEmailReqBody = await req.json();
+}
+
+export async function POST(req: Request) {
+  const {
+    email,
+    emailcheck,
+    oldEmailcheck,
+    nickname,
+    emailType,
+  }: SendEmailReqBody = await req.json();
+  await req.json();
 
   // resend...
   if (oldEmailcheck) {

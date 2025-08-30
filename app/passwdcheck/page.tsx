@@ -2,36 +2,25 @@
 
 import { Button } from '@/components/ui/button';
 import LabelInput from '@/components/ui/label-input';
-import z from 'zod';
-import { use } from 'react';
 
-type Props = {
-  params: Promise<{ authKey: string }>;
-};
+const ForgotPassword = async (formData: FormData) => {
+  const [validError, sendResetPassword, isPending] = useActionState;
+  const sendResetPassword = async () => {};
+  const entries = Object.fromEntries(formData.entries());
+  const validator = z
+    .object({
+      passwd: z.string().min(6, '패스워드는 6글자 이상만 가능합니다!'),
+      passwd2: z.string().min(6, '패스워드는 6글자 이상만 가능합니다!'),
+    })
+    .refine(({ passwd, passwd2 }) => passwd === passwd2, '일치하지 않습니다!')
+    .safeParse(entries);
 
-export default function PasswdCheck({ params }: Props) {
-  const { authKey } = use(params);
+  if (!validator.success) {
+    const msgs = JSON.parse(validator.error.message);
+    return alert(msgs[0].message);
+  }
 
-  // Todo: member.emailcheck와 authKey비교
-  // 일치하지 않으면 메시지 보이기
-
-  const changePasswd = async (formData: FormData) => {
-    const entries = Object.fromEntries(formData.entries());
-    const validator = z
-      .object({
-        passwd: z.string().min(6, '패스워드는 6글자 이상만 가능합니다!'),
-        passwd2: z.string().min(6, '패스워드는 6글자 이상만 가능합니다!'),
-      })
-      .refine(({ passwd, passwd2 }) => passwd === passwd2, '일치하지 않습니다!')
-      .safeParse(entries);
-
-    if (!validator.success) {
-      const msgs = JSON.parse(validator.error.message);
-      return alert(msgs[0].message);
-    }
-
-    // Todo: update Member set passwd... & goto login
-  };
+  // Todo: update Member set passwd... & goto login
 
   return (
     <div className='grid place-items-center h-full'>
@@ -64,4 +53,4 @@ export default function PasswdCheck({ params }: Props) {
       </div>
     </div>
   );
-}
+};
